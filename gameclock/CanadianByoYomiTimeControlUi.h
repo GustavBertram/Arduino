@@ -9,13 +9,14 @@
 
 const char canadianByoYomiName[] PROGMEM = "Canadian ByoYomi";
 
-const char canadianByoYomiOption1[] PROGMEM = "IGS Panda       1m +25mov in 15m";
-const char canadianByoYomiOption2[] PROGMEM = "IGS Panda       1m +25mov in 10m";
-const char canadianByoYomiOption3[] PROGMEM = "IGS Panda       1m +25mov in  7m";
-const char canadianByoYomiOption4[] PROGMEM = "IGS Panda       1m +25mov in  5m";
+const char canadianByoYomiOption1[] PROGMEM = "IGS Panda       1m +25mov/15m   ";
+const char canadianByoYomiOption2[] PROGMEM = "IGS Panda       1m +25mov/10m   ";
+const char canadianByoYomiOption3[] PROGMEM = "IGS Panda       1m +25mov/7m    ";
+const char canadianByoYomiOption4[] PROGMEM = "IGS Panda       1m +25mov/5m    ";
+const char canadianByoYomiOption5[] PROGMEM = "SAGA            45m +25mov/10m  ";
 
 const char * const canadianByoYomiOptions[] PROGMEM = {
-  canadianByoYomiOption1, canadianByoYomiOption2, canadianByoYomiOption3, canadianByoYomiOption4
+  canadianByoYomiOption1, canadianByoYomiOption2, canadianByoYomiOption3, canadianByoYomiOption4, canadianByoYomiOption5
 };
 
 const char canadianByoYomiUiNormalTime[] PROGMEM = "normal";
@@ -30,7 +31,7 @@ public:
   }
   
   virtual int16_t getNumberOfOptions() { 
-    return 4;
+    return 5;
   }
   
   virtual const char *getOption(int16_t option) {
@@ -39,6 +40,7 @@ public:
       case 1: return canadianByoYomiOptions[ option ];
       case 2: return canadianByoYomiOptions[ option ];
       case 3: return canadianByoYomiOptions[ option ];
+      case 4: return canadianByoYomiOptions[ option ];
     }
     return canadianByoYomiOptions[ 0 ];
   }
@@ -73,6 +75,12 @@ public:
         byoYomiSetup.numberOfPeriods = numberOfPeriods;
         byoYomiSetup.periods[ 0 ].numberOfPlays = numberOfPlays;
         byoYomiSetup.periods[ 0 ].time = 1000L * 60L * 5L;
+        break;
+      case 4: 
+        byoYomiSetup.time = 1000L * 60L * 45L;
+        byoYomiSetup.numberOfPeriods = numberOfPeriods;
+        byoYomiSetup.periods[ 0 ].numberOfPlays = numberOfPlays;
+        byoYomiSetup.periods[ 0 ].time = 1000L * 60L * 10L;
         break;
     }
 

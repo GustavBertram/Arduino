@@ -21,9 +21,9 @@
 #include "SuddenDeathTimeControlUi.h"
 
 //Hardware:
-GameClockLcd lcd2( 7, 6, 5, 4, 3, 2);
-PushButton playerOneButton( 8 ), playerTwoButton( 10 ), menuButton( 9 );
-Buzzer buzzer( 12 );
+GameClockLcd lcd2(12, 11, 5, 4, 3, 2);
+PushButton playerOneButton( BUTTON1 ), playerTwoButton( BUTTON2 ), menuButton( MIDDLEBUTTON );
+Buzzer buzzer( BUZZER );
 
 //GameClock...
 ArduinoClock clock;
@@ -49,6 +49,9 @@ GameButtonGestures buttonGestures;
 
 void setup() {
   //Serial.begin(9600);
+
+  pinMode(LED1, OUTPUT);
+  pinMode(LED2, OUTPUT);
 
   lcd2.init();
   playerOneButton.init();

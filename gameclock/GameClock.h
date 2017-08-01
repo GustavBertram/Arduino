@@ -7,6 +7,14 @@
 #include "TimeTrackerImpl.h"
 #include "Buzzer.h"
 
+// Pins
+const int LED1 = 6;
+const int LED2 = 7;
+const int BUZZER = 13;
+const int BUTTON1 = 8;
+const int BUTTON2 = 10;
+const int MIDDLEBUTTON = 9;
+
 extern Buzzer buzzer;
 
 class GameClock {
@@ -80,6 +88,8 @@ public:
     currentPlayer->beginPause( clock );
     paused = true;
     beep();
+    digitalWrite(LED1, LOW);
+    digitalWrite(LED2, LOW);
   }
   
   void resume() {
@@ -88,6 +98,15 @@ public:
     }
     currentPlayer->endPause( clock );
     paused = false;
+
+    if( isPlayerOnePlaying() ) {
+      digitalWrite(LED1, HIGH);
+      digitalWrite(LED2, LOW);
+    } else if( isPlayerTwoPlaying() ) {
+      digitalWrite(LED1, LOW);
+      digitalWrite(LED2, HIGH);
+    }
+    
     beep();
   }
   
@@ -129,6 +148,8 @@ private:
     currentPlayer = &playerOne;
     currentPlayer->mark( clock );
     timeControl->onPlayerOneBeganToPlay();
+    digitalWrite(LED1, HIGH);
+    digitalWrite(LED2, LOW);
     beep();
   }
 
@@ -157,6 +178,8 @@ private:
     currentPlayer = &playerTwo;
     currentPlayer->mark( clock );
     timeControl->onPlayerTwoBeganToPlay();
+    digitalWrite(LED1, LOW);
+    digitalWrite(LED2, HIGH);
     beep();
   }
   
